@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+from urllib.request import urlopen
+import json
+
+ROBO_URL = 'http://robopi:8888/'
+
+
+def call_api(url, data):
+  data = json.dumps(data).encode()
+  urlopen(url, data).read()
+
+
+def call_robot(func, **args):
+  call_api(ROBO_URL + func, args)
+
+
+call_robot('forward')
+call_robot('backward')
+call_robot('forward', duration=0.5, speed=1)
+call_robot('spin_right')
